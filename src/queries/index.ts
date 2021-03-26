@@ -3,10 +3,14 @@ import { gql } from '@apollo/client';
 export const GET_PEOPLE = gql`
   query PeopleQuery($page: Int!) {
     getPeople(page: $page) {
-      name
-      gender
-      mass
-      homeworld
+      people {
+        name,
+        height,
+        mass,
+        gender,
+        homeworld
+      }
+      count
     }
   }
 `

@@ -2,7 +2,7 @@
   display: inline-block;
 }
 
-.pagination a {
+.pagination p {
   color: black;
   float: left;
   padding: 8px 16px;
@@ -12,10 +12,10 @@
   margin: 0 4px;
 }
 
-.pagination a.active {
+.pagination p.active {
   background-color: #4CAF50;
   color: white;
   border: 1px solid #4CAF50;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination p:hover:not(.active) {background-color: #ddd;}
