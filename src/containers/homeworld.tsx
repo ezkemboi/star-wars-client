@@ -12,8 +12,6 @@ const HomeWorld: React.FC = () => {
     variables: { homeWorldUrl: searchName}
   });
 
-  console.log({ error })
-
   const goBack = () => {
     history.push('/');
   }
@@ -34,7 +32,7 @@ const HomeWorld: React.FC = () => {
         <Grid display="flex" justifyContent="center">
           <Box 
             maxW="sm" 
-            minW="40%" 
+            minW="70%" 
             borderWidth="1px" 
             borderRadius="lg" 
             overflow="hidden"
@@ -45,41 +43,55 @@ const HomeWorld: React.FC = () => {
               textAlign="center" 
               as="h3" 
               size="xl"
+              borderBottom="1px solid"
+              marginBottom="5px"
             >
               {data.getUserHomeWorld.name}
             </Heading>
-            <Text><strong>Climate: </strong>{data.getUserHomeWorld.climate}</Text>
-            <Text><strong>Gravity: </strong>{data.getUserHomeWorld.gravity}</Text>
-            <Text><strong>Diameter: </strong>{data.getUserHomeWorld.diameter}</Text>
-            <Text><strong>Population: </strong>{data.getUserHomeWorld.population}</Text>
-            <Text><strong>Rotation Period: </strong>{data.getUserHomeWorld.rotation_period}</Text>
-            <Text><strong>Orbital Period: </strong>{data.getUserHomeWorld.orbital_period}</Text>
-            <Text><strong>Terrain: </strong>{data.getUserHomeWorld.terrain}</Text>
-            <Text><strong>Surface Water: </strong>{data.getUserHomeWorld.surface_water}</Text>
-            <Grid display="flex" flexDirection="column">
-              <Text><strong>Residents</strong></Text>
-              {
-                data.getUserHomeWorld.residents.map((resident: string) => {
-                  return (
-                    <Link target="_blank" key={resident} href={resident}>{resident}</Link>
-                  )
-                })
-              }
-            </Grid>
-            <Grid display="flex" flexDirection="column">
-              <Text><strong>Films</strong></Text>
-              {
-                data.getUserHomeWorld.films.map((film: string) => {
-                  return (
-                    <Link target="_blank" key={film} href={film}>{film}</Link>
-                  )
-                })
-              }
+            <Grid display="flex">
+              <Box w="33%">
+                <Text><strong>Details</strong></Text>
+                <Text><strong>Climate: </strong>{data.getUserHomeWorld.climate}</Text>
+                <Text><strong>Gravity: </strong>{data.getUserHomeWorld.gravity}</Text>
+                <Text><strong>Diameter: </strong>{data.getUserHomeWorld.diameter}</Text>
+                <Text><strong>Population: </strong>{data.getUserHomeWorld.population}</Text>
+                <Text><strong>Rotation Period: </strong>{data.getUserHomeWorld.rotation_period}</Text>
+                <Text><strong>Orbital Period: </strong>{data.getUserHomeWorld.orbital_period}</Text>
+                <Text><strong>Terrain: </strong>{data.getUserHomeWorld.terrain}</Text>
+                <Text><strong>Surface Water: </strong>{data.getUserHomeWorld.surface_water}</Text>
+                </Box>
+              <Box w="33%">
+                <Grid display="flex" flexDirection="column">
+                  <Text><strong>Residents</strong></Text>
+                  {
+                    data.getUserHomeWorld.residents.map((resident: string) => {
+                      return (
+                        <Link color="teal" target="_blank" key={resident} href={resident}>{resident}</Link>
+                      )
+                    })
+                  }
+                </Grid>
+              </Box>
+              <Box w="33%">
+                <Grid display="flex" flexDirection="column">
+                  <Text><strong>Films</strong></Text>
+                  {
+                    data.getUserHomeWorld.films.map((film: string) => {
+                      return (
+                        <Link color="teal" target="_blank" key={film} href={film}>{film}</Link>
+                      )
+                    })
+                  }
+                </Grid>
+              </Box>
             </Grid>
           </Box>
         </Grid>
       }
-      
+      {
+        !loading && error &&
+        <p>An Error occurred</p>
+      }
     </Flex>
   );
 };

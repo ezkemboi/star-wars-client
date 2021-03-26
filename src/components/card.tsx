@@ -14,14 +14,16 @@ const Card = (
       mass: String,
       gender: String,
     },
-    getPeopleByName: Function,
-    getHomeWorldDetails: Function
+    getPeopleByName?: Function,
+    getHomeWorldDetails: Function,
+    isByName?: Boolean
   }
 ) => {
   const {
     person,
     getPeopleByName,
-    getHomeWorldDetails
+    getHomeWorldDetails,
+    isByName,
   } = props;
 
   return (
@@ -44,21 +46,25 @@ const Card = (
           color="teal.500" 
           onClick={() => getHomeWorldDetails(person.homeworld)}
           cursor="pointer"
+          marginTop="3px"
         >
           Check homeworld details
         </Text>
-        <Grid 
-          display="flex"
-          marginTop="4"
-        >
-          <Button 
-            colorScheme="teal" 
-            variant="outline"
-            onClick={() => getPeopleByName(person.name)}
+        {
+          !isByName && getPeopleByName &&
+          <Grid 
+            display="flex"
+            marginTop="4"
           >
-            View By Name
-          </Button>
-        </Grid>
+            <Button 
+              colorScheme="teal" 
+              variant="outline"
+              onClick={() => getPeopleByName(person.name)}
+            >
+              View By Name
+            </Button>
+          </Grid>
+        }
       </Grid>
     </Box>
   )
