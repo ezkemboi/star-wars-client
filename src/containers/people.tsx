@@ -1,18 +1,9 @@
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
-import PersonInterface from './utils/person-interface';
-
-const GET_PEOPLE_BYNAME = gql`
-  query People($name: String!) {
-    getPeopleByName(name: $name) {
-      name,
-      gender
-      mass
-      homeworld
-    }
-  }
-`
+import { Button } from "@chakra-ui/react";
+import PersonInterface from '../utils/person-interface';
+import { GET_PEOPLE_BYNAME } from '../queries';
 
 const Person: React.FC = () => {
   const urlParams = new URLSearchParams(window.location.search );
@@ -28,17 +19,9 @@ const Person: React.FC = () => {
 
   return (
     <div style={{ margin: '20px' }}>
-      <button
-        onClick={goBack}
-        style={{ 
-          backgroundColor: 'red', 
-          color: 'white', 
-          padding: '5px', 
-          cursor: 'pointer'
-        }}
-      >
+      <Button colorScheme="teal" size="xs" onClick={goBack}>
         Go Back
-      </button>
+      </Button>
       {
         loading &&
         <p>Loading....</p>

@@ -1,26 +1,20 @@
 import React from 'react';
-import {Route, BrowserRouter as Router, Switch} from 'react-router-dom'
-import './App.css';
+import { ChakraProvider } from "@chakra-ui/react"
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import Routes from './routes';
 
-import Home from './home';
-import Person from './people';
+const client = new ApolloClient({
+  uri: process.env.REACT_APP_URL,
+  cache: new InMemoryCache()
+})
 
 const App = () => {
   return (
-    <Router>
-      <Switch>
-        <Route 
-          path='/' 
-          exact 
-          component={Home} 
-        />
-        <Route 
-          path='/people' 
-          exact 
-          component={Person} 
-        />
-      </Switch>
-    </Router>
+    <ChakraProvider>
+      <ApolloProvider client={client}>
+        <Routes />
+      </ApolloProvider>
+    </ChakraProvider>
   )
 }
 
