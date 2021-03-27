@@ -1,10 +1,14 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
+import { Grid, Text } from "@chakra-ui/react";
 import { useHistory } from 'react-router-dom';
-import { Button } from "@chakra-ui/react";
 import PersonInterface from '../utils/person-interface';
 import { GET_PEOPLE_BYNAME } from '../queries';
 import Card from '../components/card';
+import Loading from '../components/loading';
+import Wrapper from '../components/wrapper';
+import Header from '../components/header';
+import GoBack from '../components/go-back';
 
 const Person: React.FC = () => {
   const urlParams = new URLSearchParams(window.location.search );
@@ -14,10 +18,6 @@ const Person: React.FC = () => {
     variables: { name: searchName}
   });
 
-  const goBack = () => {
-    history.push('/');
-  }
-
   const getHomeWorldDetails = (link: string) => {
     history.push({
       pathname: '/homeworld',
@@ -26,37 +26,37 @@ const Person: React.FC = () => {
   }
 
   return (
-    <div style={{ margin: '20px' }}>
-      <Button 
-        colorScheme="teal" 
-        size="xs" 
-        marginBottom="20px" 
-        onClick={goBack}
-      >
-        Go Back
-      </Button>
+    <Wrapper>
+      <Header />
+      <GoBack
+        historyLink='/'
+      />
       {
         loading &&
-        <p>Loading....</p>
+        <Loading />
       }
       {
         !loading && data.getPeopleByName && data.getPeopleByName.length > 0 &&
-        data.getPeopleByName.map((person: PersonInterface) => {
-          return (
-            <Card 
-              key={person.name}
-              person={person} 
-              getHomeWorldDetails={getHomeWorldDetails}
-              isByName={true}
-            />
-          )
-        })
+        <Grid display="flex" justifyContent="center" marginTop="6">
+          {
+            data.getPeopleByName.map((person: PersonInterface) => {
+              return (
+                <Card 
+                  key={person.name}
+                  person={person} 
+                  getHomeWorldDetails={getHomeWorldDetails}
+                  isByName={true}
+                />
+              )
+            })
+          }
+        </Grid>
       }
       {
         !loading && error &&
-        <p>An Error occurred</p>
+        <Text>An Error occurred</Text>
       }
-    </div>
+    </Wrapper>
   );
 };
 

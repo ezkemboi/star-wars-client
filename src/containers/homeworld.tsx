@@ -1,32 +1,29 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { useHistory } from 'react-router-dom';
-import { Flex, Grid, Heading, Link, Text, Box, Button } from "@chakra-ui/react";
+import { Grid, Heading, Link, Text, Box } from "@chakra-ui/react";
 import { GET_HOMEWORLD_DETAILS } from '../queries';
+import Loading from '../components/loading';
+import Wrapper from '../components/wrapper';
+import Header from '../components/header';
+import GoBack from '../components/go-back';
 
 const HomeWorld: React.FC = () => {
   const urlParams = new URLSearchParams(window.location.search );
   const searchName = urlParams.get('homeWorldUrl');
-  const history = useHistory();
   const { loading, error, data } = useQuery(GET_HOMEWORLD_DETAILS, {
     variables: { homeWorldUrl: searchName}
   });
 
-  const goBack = () => {
-    history.push('/');
-  }
-
   return (
-    <Flex direction="column" alignContent="center" padding="1%">
+    <Wrapper>
+      <Header />
       {
         loading &&
-        <Text textAlign="center">Loading....</Text>
+        <Loading />
       }
-      <Grid display="flex" justifyContent="center">
-        <Button colorScheme="teal" size="xs" onClick={goBack}>
-          Go Back
-        </Button>
-      </Grid>
+      <GoBack
+        historyLink={'/'}
+      />
       {
         data &&
         <Grid display="flex" justifyContent="center">
@@ -92,7 +89,7 @@ const HomeWorld: React.FC = () => {
         !loading && error &&
         <p>An Error occurred</p>
       }
-    </Flex>
+    </Wrapper>
   );
 };
 

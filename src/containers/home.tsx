@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
-import { 
-  Flex, 
-  Grid, 
-  Heading,
-  Text
-} from "@chakra-ui/react";
+import { Flex, Grid, Text } from "@chakra-ui/react";
 import Card from '../components/card';
 import PersonInterface from '../utils/person-interface';
 import { GET_PEOPLE } from '../queries';
+import Loading from '../components/loading';
+import Wrapper from '../components/wrapper';
+import Pagination from '../components/pagination';
+import Header from '../components/header';
 
 const Home: React.FC = () => {
   const history = useHistory();
@@ -47,13 +46,11 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div style={{ margin: '20px' }}>
-      <Heading textAlign="center" marginBottom="6">
-        Star Wars
-      </Heading>
+    <Wrapper>
+      <Header />
       {
         loading &&
-        <Text textAlign="center">Loading....</Text>
+        <Loading />
       }
       {
         !loading && data.getPeople.people && data.getPeople.people.length > 0 &&
@@ -72,43 +69,21 @@ const Home: React.FC = () => {
               })
             }
           </Grid>
-          <div style={{textAlign: 'center', marginTop:"20px"}}>
-            <div className="pagination">
-              <Text 
-                cursor="pointer" 
-                onClick={() => fetchByPageNumber(page - 1)}
-              >
-                &laquo;
-              </Text>
-              {
-                data.getPeople && pages.map((pageNo: number) => {
-                  return (
-                    <Text 
-                      key={pageNo} 
-                      cursor="pointer"
-                      className={page === pageNo ? 'active' : ''}
-                      onClick={() => fetchByPageNumber(pageNo)}
-                    >
-                      {pageNo}
-                    </Text>
-                  )
-                })
-              }
-              <Text 
-                cursor="pointer" 
-                onClick={() => fetchByPageNumber(page + 1)}
-              >
-                &raquo;
-              </Text>
-            </div>
-          </div>
+          {
+            !loading && data.getPeople.people &&
+            <Pagination 
+              fetchByPageNumber={fetchByPageNumber}
+              pages={pages}
+              page={page}
+            />
+          }
         </Flex>
       }
       {
         !loading && error &&
-        <p>An Error occurred</p>
+        <Text>An Error occurred</Text>
       }
-    </div>
+    </Wrapper>
   );
 };
 

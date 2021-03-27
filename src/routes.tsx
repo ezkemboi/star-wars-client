@@ -3,8 +3,7 @@ import {
   Route, 
   BrowserRouter as Router, 
   Switch
-} from 'react-router-dom'
-import './App.css';
+} from 'react-router-dom';
 
 import Home from './containers/home';
 import Person from './containers/people';
