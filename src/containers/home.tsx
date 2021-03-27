@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useQuery } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import { Flex, Grid, Text } from "@chakra-ui/react";
@@ -9,13 +9,24 @@ import Loading from '../components/loading';
 import Wrapper from '../components/wrapper';
 import Pagination from '../components/pagination';
 import Header from '../components/header';
+import MainContext from '../context';
+import updateLocationHistory from '../utils/update-location-history';
 
 const Home: React.FC = () => {
+  const { contextState, setContext } = useContext(MainContext);
   const history = useHistory();
   const [page, setPage]= useState(1); // default being 1
+  
   const { loading, error, data, refetch } = useQuery(GET_PEOPLE, {
     variables: { page: page }
   });
+
+  useEffect(() => {
+    const location: string = window.location.pathname + window.location.search;
+    if(location !== contextState.currentPage) {
+      updateLocationHistory(contextState, location, setContext);
+    }
+  })
 
   const getPeopleByName = (name: string) => {
     // push to the same page

@@ -1,29 +1,39 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useQuery } from '@apollo/client';
 import { Grid, Heading, Link, Text, Box } from "@chakra-ui/react";
 import { GET_HOMEWORLD_DETAILS } from '../queries';
 import Loading from '../components/loading';
 import Wrapper from '../components/wrapper';
 import Header from '../components/header';
-import GoBack from '../components/go-back';
+import Navigation from '../components/navigations';
+import MainContext from '../context';
+import updateLocationHistory from '../utils/update-location-history';
 
 const HomeWorld: React.FC = () => {
+  const { contextState, setContext } = useContext(MainContext);
   const urlParams = new URLSearchParams(window.location.search );
   const searchName = urlParams.get('homeWorldUrl');
   const { loading, error, data } = useQuery(GET_HOMEWORLD_DETAILS, {
     variables: { homeWorldUrl: searchName}
   });
 
+  useEffect(() => {
+    const location: string = window.location.pathname + window.location.search;
+    if(location !== contextState.currentPage) {
+      updateLocationHistory(contextState, location, setContext);
+    }
+  })
+
   return (
     <Wrapper>
       <Header />
+      <Navigation
+        historyLink={contextState.prevPage}
+      />
       {
         loading &&
         <Loading />
       }
-      <GoBack
-        historyLink={'/'}
-      />
       {
         data &&
         <Grid display="flex" justifyContent="center">

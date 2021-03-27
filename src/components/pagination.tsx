@@ -1,7 +1,7 @@
 /**
  * This makes use of styled-components
  * Trying to get pagination done in styled-components 
- * to help me learn styled-components by using it
+ * to help me learn on styled-components by using it
  */
 import React from 'react';
 import { Text, Flex } from '@chakra-ui/react';
