@@ -1,6 +1,6 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { Grid, Heading, Link, Text, Box } from "@chakra-ui/react";
+import { Grid, Flex, Heading, Link, Text, Box } from "@chakra-ui/react";
 import { GET_HOMEWORLD_DETAILS } from '../queries';
 import Loading from '../components/loading';
 import Wrapper from '../components/wrapper';
@@ -11,6 +11,8 @@ import updateLocationHistory from '../utils/update-location-history';
 
 const HomeWorld: React.FC = () => {
   const { contextState, setContext } = useContext(MainContext);
+  const screenWidth = window.innerWidth;
+  const [isSmallScreen, setScreen] = useState(screenWidth < 700);
   const urlParams = new URLSearchParams(window.location.search );
   const searchName = urlParams.get('homeWorldUrl');
   const { loading, error, data } = useQuery(GET_HOMEWORLD_DETAILS, {
@@ -24,6 +26,10 @@ const HomeWorld: React.FC = () => {
     }
   })
 
+  useEffect(() => {
+    setScreen(screenWidth < 700);
+  }, [screenWidth])
+
   return (
     <Wrapper>
       <Header />
@@ -36,7 +42,7 @@ const HomeWorld: React.FC = () => {
       }
       {
         data &&
-        <Grid display="flex" justifyContent="center">
+        <Flex justifyContent="center">
           <Box 
             maxW="sm" 
             minW="70%" 
@@ -55,8 +61,8 @@ const HomeWorld: React.FC = () => {
             >
               {data.getUserHomeWorld.name}
             </Heading>
-            <Grid display="flex">
-              <Box w="33%">
+            <Flex justifyContent="center" direction={isSmallScreen ? 'column' : 'row'}>
+              <Box w={isSmallScreen ? '100%' : '33%'}>
                 <Text><strong>Details</strong></Text>
                 <Text><strong>Climate: </strong>{data.getUserHomeWorld.climate}</Text>
                 <Text><strong>Gravity: </strong>{data.getUserHomeWorld.gravity}</Text>
@@ -67,9 +73,9 @@ const HomeWorld: React.FC = () => {
                 <Text><strong>Terrain: </strong>{data.getUserHomeWorld.terrain}</Text>
                 <Text><strong>Surface Water: </strong>{data.getUserHomeWorld.surface_water}</Text>
                 </Box>
-              <Box w="33%">
+              <Box w={isSmallScreen ? '100%' : '33%'}>
                 <Grid display="flex" flexDirection="column">
-                  <Text><strong>Residents</strong></Text>
+                  <Text marginTop={isSmallScreen ? '2' : ''}><strong>Residents</strong></Text>
                   {
                     data.getUserHomeWorld.residents.map((resident: string) => {
                       return (
@@ -79,9 +85,9 @@ const HomeWorld: React.FC = () => {
                   }
                 </Grid>
               </Box>
-              <Box w="33%">
+              <Box w={isSmallScreen ? '100%' : '33%'}>
                 <Grid display="flex" flexDirection="column">
-                  <Text><strong>Films</strong></Text>
+                  <Text marginTop={isSmallScreen ? '2' : ''}><strong>Films</strong></Text>
                   {
                     data.getUserHomeWorld.films.map((film: string) => {
                       return (
@@ -91,13 +97,13 @@ const HomeWorld: React.FC = () => {
                   }
                 </Grid>
               </Box>
-            </Grid>
+            </Flex>
           </Box>
-        </Grid>
+        </Flex>
       }
       {
         !loading && error &&
-        <p>An Error occurred</p>
+        <Text>An Error occurred</Text>
       }
     </Wrapper>
   );

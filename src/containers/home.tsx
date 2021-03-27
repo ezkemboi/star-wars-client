@@ -15,6 +15,8 @@ import updateLocationHistory from '../utils/update-location-history';
 const Home: React.FC = () => {
   const { contextState, setContext } = useContext(MainContext);
   const history = useHistory();
+  const screenWidth = window.innerWidth;
+  const [isSmallScreen, setScreen] = useState(screenWidth < 700);
   const [page, setPage]= useState(1); // default being 1
   
   const { loading, error, data, refetch } = useQuery(GET_PEOPLE, {
@@ -27,6 +29,10 @@ const Home: React.FC = () => {
       updateLocationHistory(contextState, location, setContext);
     }
   })
+
+  useEffect(() => {
+    setScreen(screenWidth < 700);
+  }, [screenWidth])
 
   const getPeopleByName = (name: string) => {
     // push to the same page
@@ -66,7 +72,7 @@ const Home: React.FC = () => {
       {
         !loading && data.getPeople.people && data.getPeople.people.length > 0 &&
         <Flex direction="column">
-          <Grid templateColumns="repeat(4, 1fr)" gap={3}>
+          <Grid templateColumns={ isSmallScreen ? "repeat(1, 1fr)": "repeat(4, 1fr)"} gap={3}>
             {
               data.getPeople.people.map((person: PersonInterface) => {
                 return (
