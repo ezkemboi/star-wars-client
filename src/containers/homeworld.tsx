@@ -72,7 +72,7 @@ const HomeWorld: React.FC = () => {
                 <Text><strong>Orbital Period: </strong>{data.getUserHomeWorld.orbital_period}</Text>
                 <Text><strong>Terrain: </strong>{data.getUserHomeWorld.terrain}</Text>
                 <Text><strong>Surface Water: </strong>{data.getUserHomeWorld.surface_water}</Text>
-                </Box>
+              </Box>
               <Box w={isSmallScreen ? '100%' : '33%'}>
                 <Grid display="flex" flexDirection="column">
                   <Text marginTop={isSmallScreen ? '2' : ''}><strong>Residents</strong></Text>

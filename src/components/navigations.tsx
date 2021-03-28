@@ -1,45 +1,22 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { Grid, Button } from '@chakra-ui/react';
-import styled from 'styled-components';
-
-const StyledButton = styled(Button)`
-  padding:"8px"  
-  size:"xl"
-`
+import { Grid } from '@chakra-ui/react';
+import ButtonLink from '../components/button-link';
 
 interface NavigationProps  {
   historyLink: string
 }
 
-const Navigation = (
-  { historyLink }: NavigationProps
-) => {
-  const history = useHistory();
-
-  const navigateBack = () => {
-    history.push(historyLink);
-  }
-
-  const navigateBackHome = () => {
-    history.push('/')
-  }
-
+const Navigation = ({ historyLink }: NavigationProps) => {
   return (
     <Grid display="flex" justifyContent="center">
-      <StyledButton 
-        colorScheme="teal"
-        marginRight="6"
-        onClick={navigateBack}
-      >
-        Go Back
-      </StyledButton>
-      <StyledButton
-        colorScheme="teal"
-        onClick={navigateBackHome}
-      >
-        Go Home
-      </StyledButton>
+      <ButtonLink 
+        url={historyLink}
+        title='Go Back'
+      />
+      <ButtonLink 
+        url='/'
+        title='Go Home'
+      />
     </Grid>
   )
 }

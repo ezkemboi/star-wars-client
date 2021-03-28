@@ -8,6 +8,7 @@ import {
 import Home from './containers/home';
 import Person from './containers/people';
 import HomeWorld from './containers/homeworld';
+import PageNotFound from './containers/page-not-found';
 
 const Routes = () => {
   return (
@@ -27,6 +28,9 @@ const Routes = () => {
           path='/homeworld' 
           exact 
           component={HomeWorld} 
+        />
+        <Route
+          component={PageNotFound}
         />
       </Switch>
     </Router>

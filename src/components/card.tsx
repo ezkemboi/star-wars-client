@@ -1,10 +1,6 @@
 import React from 'react';
-import { 
-  Box, 
-  Grid, 
-  Text, 
-  Button 
-} from "@chakra-ui/react";
+import { Box, Grid, Text } from "@chakra-ui/react";
+import MainButton from './button';
 
 interface CardProps {
   person : { 
@@ -56,13 +52,10 @@ const Card = (
             display="flex"
             marginTop="4"
           >
-            <Button 
-              colorScheme="teal" 
-              variant="outline"
-              onClick={() => getPeopleByName(person.name)}
-            >
-              View By Name
-            </Button>
+            <MainButton 
+              title={'View By Name'}
+              onClickLink={() => getPeopleByName(person.name)}
+            />
           </Grid>
         }
       </Grid>
