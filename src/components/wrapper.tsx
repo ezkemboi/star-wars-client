@@ -1,10 +1,12 @@
 import React from 'react';
 import { Flex } from '@chakra-ui/react';
 
+interface WrapperProps {
+  children: Array<object> 
+}
+
 const Wrapper = (
-  props: { 
-    children: Array<object> 
-  }
+  { children }: WrapperProps
 ) => {
   return (
     <Flex 
@@ -12,7 +14,7 @@ const Wrapper = (
       alignContent="center" 
       padding="1%"
     >
-      {props.children}
+      {children}
     </Flex>
   )
 }

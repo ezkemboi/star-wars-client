@@ -1,10 +1,17 @@
 import React from 'react';
 import { Heading } from "@chakra-ui/react";
 
-const Header = () => {
+interface HeaderProps {
+  title: String
+}
+
+const Header = ({ title }: HeaderProps) => {
   return (
-    <Heading textAlign="center" marginBottom="6">
-      Star Wars
+    <Heading 
+      textAlign="center" 
+      marginBottom="6"
+    >
+      { title}
     </Heading>
   )
 }

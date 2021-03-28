@@ -32,7 +32,7 @@ const HomeWorld: React.FC = () => {
 
   return (
     <Wrapper>
-      <Header />
+      <Header title={"Star Wars"}/>
       <Navigation
         historyLink={contextState.prevPage}
       />

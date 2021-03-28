@@ -8,12 +8,13 @@ const StyledButton = styled(Button)`
   size:"xl"
 `
 
+interface NavigationProps  {
+  historyLink: string
+}
+
 const Navigation = (
-  props: {
-    historyLink: string
-  }
+  { historyLink }: NavigationProps
 ) => {
-  const { historyLink } = props;
   const history = useHistory();
 
   const navigateBack = () => {

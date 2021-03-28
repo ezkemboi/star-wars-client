@@ -64,7 +64,7 @@ const Home: React.FC = () => {
 
   return (
     <Wrapper>
-      <Header />
+      <Header title={"Star Wars"} />
       {
         loading &&
         <Loading />

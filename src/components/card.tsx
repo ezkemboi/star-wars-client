@@ -6,26 +6,26 @@ import {
   Button 
 } from "@chakra-ui/react";
 
-const Card = (
-  props: { 
-    person : { 
-      name : string ,
-      homeworld: String,
-      mass: String,
-      gender: String,
-    },
-    getPeopleByName?: Function,
-    getHomeWorldDetails: Function,
-    isByName?: Boolean
-  }
-) => {
-  const {
-    person,
-    getPeopleByName,
-    getHomeWorldDetails,
-    isByName,
-  } = props;
+interface CardProps {
+  person : { 
+    name : string,
+    homeworld: string,
+    mass: string,
+    gender: string,
+  },
+  getPeopleByName?: Function,
+  getHomeWorldDetails: Function,
+  isByName?: boolean
+}
 
+const Card = (
+  { 
+    person, 
+    getPeopleByName, 
+    getHomeWorldDetails, 
+    isByName
+  }: CardProps
+) => {
   return (
     <Box 
       maxW="sm" 

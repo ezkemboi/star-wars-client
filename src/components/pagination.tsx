@@ -22,14 +22,19 @@ const TextElement = styled(Text)`
   ${props => props.page !== props.pageNo ? '&:hover {background-color: #ddd}': ''}
 `
 
+interface PaginationProps {
+  page: number,
+  fetchByPageNumber: Function,
+  pages: Array<number>
+}
+
 const Pagination = (
-  props: {
-    page: number,
-    fetchByPageNumber: Function,
-    pages: Array<number>
-  }
+  {
+    page,
+    pages,
+    fetchByPageNumber
+  }: PaginationProps
 ) => {
-  const { page, fetchByPageNumber, pages} = props;
 
   return (
     <Flex marginTop="15px" justifyContent="center">
