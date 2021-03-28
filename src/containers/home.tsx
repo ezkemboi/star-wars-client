@@ -17,7 +17,13 @@ const Home: React.FC = () => {
   const history = useHistory();
   const screenWidth = window.innerWidth;
   const [isSmallScreen, setScreen] = useState(screenWidth < 700);
-  const [page, setPage]= useState(1); // default being 1
+  let initialPageNo = 1;
+  // persist the last page visited by the user
+  const persistedPageNo = localStorage.getItem('pageNo');
+  if(persistedPageNo) {
+    initialPageNo = parseInt(persistedPageNo);
+  }
+  const [page, setPage]= useState(initialPageNo);
   
   const { loading, error, data, refetch } = useQuery(GET_PEOPLE, {
     variables: { page: page }
@@ -50,9 +56,11 @@ const Home: React.FC = () => {
   }
 
   const fetchByPageNumber = (pageNumber: number) => {
+    localStorage.setItem('pageNo', pageNumber.toString());
     setPage(pageNumber);
     refetch({ page: pageNumber})
   }
+
   let pages = [];
   let count = data && data.getPeople.count;
   if(count) {
