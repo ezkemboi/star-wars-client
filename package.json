@@ -27,7 +27,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -51,5 +51,13 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.9"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "!**/node_modules/**",
+      "!src/reportWebVitals.ts",
+      "!src/react-app-env.d.ts",
+      "!src/index.tsx"
+    ]
   }
 }

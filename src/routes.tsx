@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 import Home from './containers/home';
-import Person from './containers/people';
+import People from './containers/people';
 import HomeWorld from './containers/homeworld';
 import PageNotFound from './containers/page-not-found';
 
@@ -22,7 +22,7 @@ const Routes = () => {
         <Route 
           path='/people' 
           exact 
-          component={Person} 
+          component={People} 
         />
         <Route 
           path='/homeworld' 

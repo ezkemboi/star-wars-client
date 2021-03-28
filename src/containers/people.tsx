@@ -12,7 +12,7 @@ import Navigation from '../components/navigations';
 import MainContext from '../context';
 import updateLocationHistory from '../utils/update-location-history';
 
-const Person: React.FC = () => {
+const People: React.FC = () => {
   const { contextState, setContext } = useContext(MainContext);
   const urlParams = new URLSearchParams(window.location.search );
   const searchName = urlParams.get('name');
@@ -70,4 +70,4 @@ const Person: React.FC = () => {
   );
 };
 
-export default Person;
+export default People;

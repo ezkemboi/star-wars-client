@@ -78,7 +78,7 @@ const Home: React.FC = () => {
         <Loading />
       }
       {
-        !loading && data.getPeople.people && data.getPeople.people.length > 0 &&
+        !loading && data && data.getPeople.people && data.getPeople.people.length > 0 &&
         <Flex direction="column">
           <Grid templateColumns={ isSmallScreen ? "repeat(1, 1fr)": "repeat(4, 1fr)"} gap={3}>
             {
@@ -106,7 +106,7 @@ const Home: React.FC = () => {
       }
       {
         !loading && error &&
-        <Text>An Error occurred</Text>
+        <Text textAlign="center">An error occurred while fetching data</Text>
       }
     </Wrapper>
   );
