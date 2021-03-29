@@ -18,7 +18,7 @@ describe('', () => {
     await new Promise(resolve => setTimeout(resolve, 0));
   })
 
-  it('should render Get People by name details', async () => {
+  xit('should render Get People by name details', async () => {
     const component = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <People name="Ezrqn Kemboi" />
@@ -27,7 +27,7 @@ describe('', () => {
     await new Promise(resolve => setTimeout(resolve, 0));
   })
 
-  it('should render homeworld/location details', async () => {
+  xit('should render homeworld/location details', async () => {
     const component = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <HomeWorld  homeWorldUrl="http://swapi.dev/api/planets/8/" />
