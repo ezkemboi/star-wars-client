@@ -24,7 +24,7 @@ const TextElement = styled(Text)`
 
 interface PaginationProps {
   page: number,
-  fetchByPageNumber: Function,
+  fetchByPageNumber: (pageNumber: number) => void,
   pages: Array<number>
 }
 

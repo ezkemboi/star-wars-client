@@ -12,12 +12,12 @@ export const initialState: IState  = {
 
 interface IContextState {
   contextState: IState,
-  setContext: Function
+  setContext: (state: IState) => void
 }
 
 const MainContext = createContext<IContextState>({
   contextState: initialState,
-  setContext: (theme: IState) => theme
+  setContext: (state: IState) => state
 })
 
 export default MainContext

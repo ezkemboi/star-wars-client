@@ -1,13 +1,15 @@
 /**
  * Update the prevPage and currentPage
  */
+import { IState } from '../context';
+
 const updateLocationHistory = (
   contextState: {
     prevPage: string, 
     currentPage: string
   }, 
   location: string,
-  setContext: Function
+  setContext: (stateContext: IState) => void
 ) => {
   const { currentPage } = contextState;
 

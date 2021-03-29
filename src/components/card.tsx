@@ -9,8 +9,8 @@ interface CardProps {
     mass: string,
     gender: string,
   },
-  getPeopleByName?: Function,
-  getHomeWorldDetails: Function,
+  getPeopleByName?: (name: string) => void,
+  getHomeWorldDetails: (homeWorldUrl: string) => void,
   isByName?: boolean
 }
 
